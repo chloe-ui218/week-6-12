@@ -31,3 +31,28 @@ body {
 .quote-button:hover{
     background-color: #0056b3;
 }
+.save-quote-button{
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.save-quote-button:hover{
+    background-color: #218838;
+}
+.view-saved-quote-button{
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.view-saved-quote-button:hover{
+    background-color: #138496;
+}
