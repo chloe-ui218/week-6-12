@@ -55,16 +55,25 @@ function saveQuote() {
 
 function viewSavedQuotes() {
     const savedQuotes = JSON.parse(localStorage.getItem('savedQuotes')) || [];
+    const savedQuotesList = document.getElementById('savedQuotesList');
+    savedQuotesList.innerHTML = '';
 
     if (savedQuotes.length === 0) {
-        alert('No saved quotes.');
+        savedQuotesList.innerHTML = '<li>No saved quotes yet.</li>';
         return;
     }
 
-    //let quotesList = savedQuotes.map((quote) => `"${quote.content}" - ${quote.author}`).join('\n\n');
-    //lert(`Saved Quotes:\n\n${quotesList}`);
+    savedQuotes.forEach((quote) => {
+        const li = document.createElement('li');
+        li.textContent = `${quote.content} - ${quote.author}`;
+        savedQuotesList.appendChild(li);
+    });
+}
+
+function loadSavedQuotes() {
+    viewSavedQuotes();
 }
 
 document.getElementById('fetchQuoteButton').addEventListener('click', fetchQuote);
 document.getElementById('saveQuoteButton').addEventListener('click', saveQuote);
-document.getElementById('viewQuoteButton').addEventListener('click', viewSavedQuotes);
+document.getElementById('viewSavedQuotesButton').addEventListener('click', loadSavedQuotes);
