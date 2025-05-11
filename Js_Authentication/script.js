@@ -17,6 +17,13 @@ const users = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+    const savedRole = localStorage.getItem('userRole');
+    if (savedRole) {
+        displayContent(savedRole);
+    }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.querySelector('#loginForm');
 
     if (!loginForm) {
@@ -31,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const passwordInput = document.querySelector('#password');
         const errorContainer = document.querySelector('#errorMessage');
         const successContainer = document.querySelector('#successMessage');
+        localStorage.setItem('userRole', '');
+        displayCintainer
 
         if (!usernameInput || !passwordInput || !errorContainer || !successContainer) {
             console.error('Error: Required input elements not found in the DOM.');
