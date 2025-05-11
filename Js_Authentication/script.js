@@ -22,16 +22,22 @@ const loginForm = document.querySelector('#loginForm')
 loginForm.addEventListener('submit', function(e){
     e.preventDefault();
 
-    const username = document.querySelector('userName').arialValueMax;
-    const password = document.querySelector('password').arialValueMax;
+    const username = document.querySelector('#userName').value;
+    const password = document.querySelector('#password').value;
     const errorContainer = document.querySelector('#errorMessage');
+    const successContainer = document.querySelector('#successMessage');
 
-    const user =
-
-    if (!username || !password()) {
+    if (!username || !password) {
         errorContainer.textContent = 'Please fill in all fields';
     } else {
-        errorContainer.textContent = '';
-    }
+        const user = users.find(user => user.username === username && user.password === password);
 
-})
+        if (user) {
+            errorContainer.textContent = '';
+            successContainer.textContent = `Welcome 4{user.role}`;
+            alert(`Welcome ${user.role}`);
+        } else {
+            errorContainer.textContent = 'Invalid username or password';
+        }
+    }
+});
