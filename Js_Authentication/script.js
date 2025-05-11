@@ -1,3 +1,22 @@
+const users = [
+    {
+        username: 'admin',
+        password: 'admin123',
+        role: 'admin',
+    },
+    {
+        username: 'editor',
+        password: 'editor123',
+        role: 'editor',
+    },
+    {
+        username:'viewer',
+        password:'viewer123',
+        role: 'viewer',
+    }
+]
+
+
 const loginForm = document.querySelector('#loginForm')
 
 loginForm.addEventListener('submit', function(e){
@@ -7,7 +26,9 @@ loginForm.addEventListener('submit', function(e){
     const password = document.querySelector('password').arialValueMax;
     const errorContainer = document.querySelector('#errorMessage');
 
-    if (!username.trim() || !password.trim()) {
+    const user =
+
+    if (!username || !password()) {
         errorContainer.textContent = 'Please fill in all fields';
     } else {
         errorContainer.textContent = '';
