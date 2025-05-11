@@ -57,3 +57,17 @@ button:hover{
     margin: 5px 0;
     text-align: center;
 }
+
+.content {
+    width: 400ox;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;;
+    box-shadow: 0  0  10px rgnba(0, 0, 0, 0.1);
+
+}
+.content h2 {
+    margin: 5px 0px;
+    color: #333;
+    text-align: center;
+}
