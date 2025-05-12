@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+
+}
+.login-container {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.login-container h2 {
+    margin: 5px 0px;
+    color: #333;
+    text-align: center;
+}
+.login-container label {
+    display: block;
+    margin: 10px 0px 5px 0;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+
+}
+button {
+    width: 95%;
+    margin-top: 13px;
+    padding: 8px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color:#0056b3;
+}
+.error-message{
+    color: red;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.content {
+    width: 400ox;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;;
+    box-shadow: 0  0  10px rgnba(0, 0, 0, 0.1);
+
+}
+.content h2 {
+    margin: 5px 0px;
+    color: #333;
+    text-align: center;
+}
+ .create-button:hover {
+    background-color: #0056b3;
+}
+.view-button {
+    background-color: #007bff;
+}
