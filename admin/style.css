@@ -5,75 +5,109 @@
     font-family: 'poppins', sans-serif;
 }
 
-body {
+body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f0f2f5;
-
 }
-.login-container {
+.login-container{
     width: 400px;
     padding: 20px;
     background-color: #fff;
-    border-radius: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.login-container h2 {
+.login-container h2{
     margin: 5px 0px;
-    color: #333;
-    text-align: center;
+   color: #333;
+   text-align: center;
 }
-.login-container label {
+.login-container label{
     display: block;
-    margin: 10px 0px 5px 0;
+    margin: 10px 0 5px 0;
     font-weight: bold;
 }
-
-input[type="text"],
-input[type="password"] {
-    width: 95%;
-    padding: 7px;
+input[type="text"], input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-
 }
-button {
-    width: 95%;
-    margin-top: 13px;
-    padding: 8px;
-    background-color: #007bff;
+button{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
     border: none;
+    border-radius: 5px;
+    background-color: #388;
     color: #fff;
     cursor: pointer;
 }
-
 button:hover{
-    background-color:#0056b3;
+    background-color: #4a8;
 }
 .error-message{
     color: red;
     margin: 5px 0;
     text-align: center;
 }
-
+.success-message{
+    color: green;
+    margin: 5px 0;
+    text-align: center;
+} 
 .content {
-    width: 400ox;
+    width: 400px;
     padding: 20px;
     background-color: #fff;
-    border-radius: 10px;;
-    box-shadow: 0  0  10px rgnba(0, 0, 0, 0.1);
-
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .content h2 {
     margin: 5px 0px;
     color: #333;
     text-align: center;
 }
- .create-button:hover {
-    background-color: #0056b3;
+.content p{
+    margin: 10px 0;
+    color: #333;
 }
-.view-button {
-    background-color: #007bff;
+
+.logout-button{
+    width: 95%;
+    background-color: #ff6666;
+}
+.logout-button:hover {
+    background-color: #ff1a1a;
+}
+.create-button{
+    background-color: #179417;
+}
+.create-button:hover {
+    background-color: #3dc73d;
+}
+.view-button{
+    background-color: #1a75ff;
+}
+.user-management{
+    width: 400px;
+    padding: 20px;
+    background-color: #ffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+}
+.user-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
 }
