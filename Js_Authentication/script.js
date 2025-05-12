@@ -88,6 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>You have access to view content</p>`;
         }
 
+
+        const logoutButton = document.createElement('button');
+        logoutButtonogoutButon.textContent = 'Logout';
+        logout.classList.add('logout-button');
+
+        logoutButton.addEventListener('click', logout);
+
+        contentDiv.appendChild(logoutButton);
+
         document.body.appendChild(contentDiv);
+    }
+
+    const logout = () => {
+        localStorage.removeItem('userRole');
+        location.reload();
     }
 });
