@@ -79,3 +79,13 @@ button:hover{
 .logout-button:hover {
     background-color: #ff6666;
 }
+.create-button {
+    background-color: green;
+
+}
+.create-button:hover {
+    background-color: #0056b3;
+}
+.view-button {
+    background-color: #007bff;
+}

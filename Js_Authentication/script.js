@@ -21,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedRole) {
         displayContent(savedRole);
     }
-})
 
-document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.querySelector('#loginForm');
 
     if (!loginForm) {
@@ -38,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const passwordInput = document.querySelector('#password');
         const errorContainer = document.querySelector('#errorMessage');
         const successContainer = document.querySelector('#successMessage');
-        localStorage.setItem('userRole', '');
-        displayCintainer
 
         if (!usernameInput || !passwordInput || !errorContainer || !successContainer) {
             console.error('Error: Required input elements not found in the DOM.');
@@ -60,48 +56,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) {
             errorContainer.textContent = '';
             successContainer.textContent = `Welcome, ${user.role}`;
+            localStorage.setItem('userRole', user.role);
             displayContent(user.role);
         } else {
             errorContainer.textContent = 'Invalid username or password';
             successContainer.textContent = '';
         }
     });
-
-    function displayContent(role) {
-        const loginContainer = document.querySelector('#loginContainer');
-        loginContainer.style.display = 'none';
-
-        const contentDiv = document.createElement('div');
-        contentDiv.id = 'content';
-
-        if (role === 'admin') {
-            contentDiv.innerHTML = `
-                <h1>Welcome, ${role}</h1>
-                <p>You have access to manage all data and settings</p>`;
-        } else if (role === 'editor') {
-            contentDiv.innerHTML = `
-                <h1>Welcome, ${role}</h1>
-                <p>You can edit content</p>`;
-        } else if (role === 'viewer') {
-            contentDiv.innerHTML = `
-                <h1>Welcome, ${role}</h1>
-                <p>You have access to view content</p>`;
-        }
-
-
-        const logoutButton = document.createElement('button');
-        logoutButtonogoutButon.textContent = 'Logout';
-        logout.classList.add('logout-button');
-
-        logoutButton.addEventListener('click', logout);
-
-        contentDiv.appendChild(logoutButton);
-
-        document.body.appendChild(contentDiv);
-    }
-
-    const logout = () => {
-        localStorage.removeItem('userRole');
-        location.reload();
-    }
 });
+
+function displayContent(role) {
+    const loginContainer = document.querySelector('#loginContainer');
+
+    if (loginContainer) {
+        loginContainer.style.display = 'none';
+    }
+
+    let contentDiv = document.querySelector('#content');
+
+    if (!contentDiv) {
+        contentDiv = document.createElement('div');
+        contentDiv.id = 'content';
+        document.body.appendChild(contentDiv);
+    } else {
+        contentDiv.innerHTML = '';
+    }
+
+    let buttonsHTML = '';
+
+    if (role === 'admin') {
+        buttonsHTML = `
+            <button class="create-button">Create</button>
+            <button class="view-button">View</button>
+            <button class="edit-button">Edit</button>
+            <button class="delete-button">Delete</button>
+        `;
+    } else if (role === 'editor') {
+        buttonsHTML = `
+            <button>View</button>
+            <button>Edit</button>
+            <button>Delete</button>
+        `;
+    } else if (role === 'viewer') {
+        buttonsHTML = `
+            <button>View</button>
+            <button>Edit</button>
+        `;
+    }
+
+    contentDiv.innerHTML = `
+        <h1>Welcome, ${role}</h1>
+        ${buttonsHTML}
+    `;
+
+    const logoutButton = document.createElement('button');
+    logoutButton.textContent = 'Logout';
+    logoutButton.classList.add('logout-button');
+    logoutButton.addEventListener('click', logout);
+
+    contentDiv.appendChild(logoutButton);
+}
+
+function logout() {
+    localStorage.removeItem('userRole');
+    location.reload();
+}
