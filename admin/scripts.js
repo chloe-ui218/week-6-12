@@ -1,158 +1,138 @@
 const users = [
-    {
-        username: 'admin',
-        password: 'admin123',
-        role: 'admin'
-    },
-    {
-        username: 'editor',
-        password: 'editor123',
-        role: 'editor'
-    },
-    {
-        username: 'viewer',
-        password: 'viewer123',
-        role: 'viewer'
-    }
+  { username: 'admin', password: 'admin123', role: 'admin' },
+  { username: 'editor', password: 'editor123', role: 'editor' },
+  { username: 'viewer', password: 'viewer123', role: 'viewer' }
 ];
 
-const saveCurrentUser = (Username, role) => {
-    localStorage.setItem('currentUser', JSON.stringify({ Username, role }));
-}
-
-const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem('currentUser'));
-}
-
-const clearCurrentUser = () => {
-    localStorage.removeItem('currentUser');
-}
+const saveCurrentUser = (username, role) => {
+  localStorage.setItem('currentUser', JSON.stringify({ username, role }));
+};
+const getCurrentUser = () => JSON.parse(localStorage.getItem('currentUser'));
+const clearCurrentUser = () => localStorage.removeItem('currentUser');
 
 document.addEventListener('DOMContentLoaded', () => {
-   const currentUser = getCurrentUser();
-    if (currentUser) {
-        displayContent(currentUser.role);
-    } else {
-        const loginContainer = document.querySelector('.login-container');
-        if (loginContainer) {
-            loginContainer.style.display = 'block';
-        } else {
-            console.error('Login container not found');
-        }
-    }
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    displayContent(currentUser.role);
+  } else {
+    document.querySelector('.login-container').style.display = 'block';
+  }
 });
 
 const loginForm = document.querySelector('#loginForm');
+loginForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const username = document.querySelector('#userName').value.trim();
+  const password = document.querySelector('#password').value.trim();
+  const errorContainer = document.querySelector('#errorMessage');
+  const successContainer = document.querySelector('#successMessage');
 
-if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+  if (!username || !password) {
+    errorContainer.textContent = 'Please fill in all fields';
+    successContainer.textContent = '';
+    return;
+  }
 
-        const username = document.querySelector('#userName').value.trim();
-        const password = document.querySelector('#password').value.trim();
-        const errorContainer = document.querySelector('#errorMessage');
-        const successContainer = document.querySelector('#successMessage');
-
-        if (!errorContainer || !successContainer) {
-            console.error('Error or success container not found');
-            return;
-        }
-
-        if (!username || !password) {
-            errorContainer.textContent = 'Please fill in all fields';
-            successContainer.textContent = '';
-        } else {
-            const user = users.find(user => user.username === username && user.password === password);
-
-            if (user) {
-                errorContainer.textContent = '';
-                successContainer.textContent = `Welcome ${user.role}`;
-                saveCurrentUser(user.username, user.role);  
-                displayContent(user.role);
-            } else {
-                errorContainer.textContent = 'Invalid username or password';
-                successContainer.textContent = '';
-            }
-        }
-    });
-} else {
-    console.error('Login form not found');
-}
-
+  const user = users.find(u => u.username === username && u.password === password);
+  if (user) {
+    errorContainer.textContent = '';
+    successContainer.textContent = `Welcome ${user.role}`;
+    saveCurrentUser(user.username, user.role);
+    displayContent(user.role);
+  } else {
+    errorContainer.textContent = 'Invalid username or password';
+    successContainer.textContent = '';
+  }
+});
 function displayContent(role) {
-    const loginContainer = document.querySelector('.login-container');
-    if (loginContainer) {
-        loginContainer.style.display = 'none';
-    } else {
-        console.error('Login container not found');
-    }
+  const loginContainer = document.querySelector('.login-container');
+  if (loginContainer) {
+    loginContainer.style.display = 'none';
+  }
 
-    const existingContent = document.querySelector('.content');
-    if (existingContent) {
-        existingContent.remove();
-    }
+  const existingContent = document.querySelector('.content');
+  if (existingContent) {
+    existingContent.remove();
+  }
 
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('content');
+  const contentDiv = document.createElement('div');
+  contentDiv.classList.add('content');
 
-    contentDiv.innerHTML = `<h2>Welcome ${role}</h2>`;
+  const heading = document.createElement('h2');
+  heading.textContent = `Welcome ${role}`;
+  contentDiv.appendChild(heading);
 
-    if (role === 'admin') {
-        contentDiv.innerHTML = `
-           <button onclick='displayUserManagement()'>Manage Users</button>`;
-    } else if (role === 'editor') {
-        contentDiv.innerHTML = `
-            <button>View</button>
-            <button>Edit</button>
-            <button>Delete</button>`;
-    } else if (role === 'viewer') {
-        contentDiv.innerHTML = `
-            <button>View</button>
-            <button>Edit</button>`;
-    }
+  if (role === 'admin') {
+    const manageBtn = document.createElement('button');
+    manageBtn.textContent = 'Manage Users';
+    manageBtn.onclick = displayUserManagement;
+    contentDiv.appendChild(manageBtn);
+  } else if (role === 'editor') {
+    ['View', 'Edit', 'Delete'].forEach(text => {
+      const btn = document.createElement('button');
+      btn.textContent = text;
+      contentDiv.appendChild(btn);
+    });
+  } else {
+    ['View', 'Edit'].forEach(text => {
+      const btn = document.createElement('button');
+      btn.textContent = text;
+      contentDiv.appendChild(btn);
+    });
+  }
 
-    const logoutButton = document.createElement('button');
-    logoutButton.textContent = 'Logout';
-    logoutButton.classList.add('logout-button');
+  const logoutButton = document.createElement('button');
+  logoutButton.textContent = 'Logout';
+  logoutButton.classList.add('logout-button');
+  logoutButton.addEventListener('click', logout);
+  contentDiv.appendChild(logoutButton);
 
-    logoutButton.addEventListener('click', logout);
-
-    contentDiv.appendChild(logoutButton);
-    document.body.appendChild(contentDiv);
+  document.body.appendChild(contentDiv);
 }
 
 const displayUserManagement = () => {
-    const userManagementDiv = document.createElement('div');
-    userManagementDiv.className = 'user-management';
+  document.querySelector('.user-management')?.remove();
 
-    userManagementDiv.innerHTML = '<h2>User Management</h2>';
+  const div = document.createElement('div');
+  div.className = 'user-management';
 
-    users.forEach((user, index) => {
-        const userDiv = document.createElement('div');
-        userDiv.classList.add('user-row');
-        userDiv.innerHTML = `
-            <span>${user.username}</span>
-            <select onchange="changeRole(${index}, this.value)">
-            <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
-            <option value="editor" ${user.role === 'editor' ? 'selected' : ''}>Editor</option>
-            <option value="viewer" ${user.role === 'viewer' ? 'selected' : ''}>Viewer</option>
-            </select>
-        `
-        userManagementDiv.appendChild(userDiv);
+  const h2 = document.createElement('h2');
+  h2.textContent = 'User Management';
+  div.appendChild(h2);
+
+  users.forEach((user, i) => {
+    const row = document.createElement('div');
+    row.className = 'user-row';
+
+    const name = document.createElement('span');
+    name.textContent = user.username;
+    row.appendChild(name);
+
+    const sel = document.createElement('select');
+    ['admin', 'editor', 'viewer'].forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r;
+      opt.textContent = r.charAt(0).toUpperCase() + r.slice(1);
+      if (user.role === r) opt.selected = true;
+      sel.appendChild(opt);
     });
-    document.body.appendChild(userManagementDiv);
+    sel.addEventListener('change', () => changeRole(i, sel.value));
+    row.appendChild(sel);
 
-}
+    div.appendChild(row);
+  });
 
-changeRole = (index, newRole) => {
-    users[index].role = newRole;
-    const currentUser = getCurrentUser();
-    alert(`User ${users[index].username} role has been changed to ${newRole}`);
-    
-        displayContent(currentUser.role);
-    };
+  document.body.appendChild(div);
+};
+
+const changeRole = (i, role) => {
+  users[i].role = role;
+  const currentUser = getCurrentUser();
+  alert(`User ${users[i].username} role has been changed to ${role}`);
+  displayContent(currentUser.role);
+};
 
 const logout = () => {
-    clearCurrentUser();
-    location.reload();
-}
+  clearCurrentUser();
+  location.reload();
+};

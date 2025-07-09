@@ -16,6 +16,13 @@ const users = [
     }
 ];
 
+const products = [
+    { id: 1, name: "Laptop", description: "High end laptop", price: 999 },
+    { id: 2, name: "Phone", description: "smartphone with great camera", price: 699 },
+    { id: 3, name: "Tablet", description: "perfect for on-the-go", price: 499 }
+];
+
+
 const saveCurrentUser = (Username, role) => {
     localStorage.setItem('currentUser', JSON.stringify({ Username, role }));
 }
@@ -98,18 +105,25 @@ function displayContent(role) {
     contentDiv.innerHTML = `<h2>Welcome ${role}</h2>`;
 
     if (role === 'admin') {
+
         contentDiv.innerHTML = `
-           <button onclick='displayUserManagement()'>Manage Users</button>`;
+           <button onclick='displayUserManagement()'>Manage Users</button>;
+           <button onclick='displayProducts()'>View Products</button>
+        `  
     } else if (role === 'editor') {
-        contentDiv.innerHTML = `
-            <button>View</button>
-            <button>Edit</button>
-            <button>Delete</button>`;
-    } else if (role === 'viewer') {
-        contentDiv.innerHTML = `
-            <button>View</button>
-            <button>Edit</button>`;
+        contentDiv.innerHTML += `
+            <button onclick="displayProducts()">View Products</button>;`
+
+    } else if(role === 'viewer') {
+        contentDiv.innerHTML += `
+            <button onclick="displayProducts()">View Products</button>
+        `
     }
+
+//  const viewBtn = document.createElement('button');
+// viewBtn.textContent = 'View Products';
+// viewBtn.onclick = displayProducts;
+// contentDiv.appendChild(viewBtn);
 
     const logoutButton = document.createElement('button');
     logoutButton.textContent = 'Logout';
@@ -144,7 +158,7 @@ const displayUserManagement = () => {
 
 }
 
-changeRole = (index, newRole) => {
+const changeRole = (index, newRole) => {
     users[index].role = newRole;
     const currentUser = getCurrentUser();
     alert(`User ${users[index].username} role has been changed to ${newRole}`);
@@ -155,4 +169,24 @@ changeRole = (index, newRole) => {
 const logout = () => {
     clearCurrentUser();
     location.reload();
+}
+const displayProducts = () => {
+    const productsDiv = document.createElement('div');
+    productsDiv.classList.add('procucts-container');
+
+    productsDiv.innerHTML = '<h2>List of all Products</h2>';
+
+    products.forEach((product, index) => {
+        const productDiv = document.createElement('div');
+    productDiv.classList.add('product-row');
+
+    productDiv.innerHTML = `
+    <p><strong>Product </strong><span>${product.name}<span></p>
+    <p><strong>Description: </strong><span>${product.description}</span></p>
+    <p><strong>Price: </strong><span>$${product.price}</span></p>
+    `
+    productsDiv.appendChild(productDiv);
+    });
+
+    document.body.appendChild(productsDiv);
 }
