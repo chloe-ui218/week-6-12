@@ -55,6 +55,7 @@ if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
+
         const username = document.querySelector('#userName').value.trim();
         const password = document.querySelector('#password').value.trim();
         const errorContainer = document.querySelector('#errorMessage');
@@ -86,6 +87,9 @@ if (loginForm) {
     console.error('Login form not found');
 }
 
+let isUserManagementOpen = false;
+let isProductsOpen = false;
+
 
 function displayContent(role) {
     const loginContainer = document.querySelector('.login-container');
@@ -107,18 +111,29 @@ function displayContent(role) {
 
     if (role === 'admin') {
 
-        contentDiv.innerHTML = `
-           <button onclick='displayUserManagement()'>Manage Users</button>;
-           <button onclick='displayProducts()'>View Products</button>
-        `  
+        const manageUserBtn = document.createElement('button');
+        manageUserBtn.textContent = 'Manage Users';
+        manageUserBtn.id = 'manageUserBtn';
+        manageUserBtn.addEventListener('click', displayUserManagement);
+        contentDiv.appendChild(manageUserBtn);
+    
+        const viewProductBtn = document.createElement('button');
+        viewProductBtn.textContent = 'View Products';
+        viewProductBtn.id = 'viewProductBtn';
+        viewProductBtn.addEventListener('click', displayProducts);
+        contentDiv.appendChild(viewProductBtn);
+    
     } else if (role === 'editor') {
-        contentDiv.innerHTML += `
-            <button onclick="displayProducts()">View Products</button>;`
-
-    } else if(role === 'viewer') {
-        contentDiv.innerHTML += `
-            <button onclick="displayProducts()">View Products</button>
-        `
+        const viewProductBtn = document.createElement('button');
+        viewProductBtn.textContent = 'View Products';
+        viewProductBtn.addEventListener('click', displayProducts);
+        contentDiv.appendChild(viewProductBtn);
+    
+    } else if (role === 'viewer') {
+        const viewProductBtn = document.createElement('button');
+        viewProductBtn.textContent = 'View Products';
+        viewProductBtn.addEventListener('click', displayProducts);
+        contentDiv.appendChild(viewProductBtn);
     }
 
 //  const viewBtn = document.createElement('button');
@@ -137,6 +152,11 @@ function displayContent(role) {
 }
 
 const displayUserManagement = () => {
+
+    if (isUserManagementOpen) return;
+
+    isUserManagementOpen = true;
+
     const userManagementDiv = document.createElement('div');
     userManagementDiv.className = 'user-management';
 
@@ -157,11 +177,12 @@ const displayUserManagement = () => {
     })
 
     const closeButton = document.createElement('button');
-closeButton.textContent = 'close';
+closeButton.textContent = 'Close';
 closeButton.classList.add('close-button');
 
 closeButton.addEventListener('click', () => {
     userManagementDiv.remove();
+    isUserManagementOpen = false;
 })
   userManagementDiv.appendChild(closeButton);
   ;
@@ -211,5 +232,4 @@ const displayProducts = () => {
     productsDiv.appendChild(closeButton);
     document.body.appendChild(productsDiv);
 
-    document.body.appendChild(productsDiv);
 }
