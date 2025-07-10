@@ -86,6 +86,7 @@ if (loginForm) {
     console.error('Login form not found');
 }
 
+
 function displayContent(role) {
     const loginContainer = document.querySelector('.login-container');
     if (loginContainer) {
@@ -153,7 +154,18 @@ const displayUserManagement = () => {
             </select>
         `
         userManagementDiv.appendChild(userDiv);
-    });
+    })
+
+    const closeButton = document.createElement('button');
+closeButton.textContent = 'close';
+closeButton.classList.add('close-button');
+
+closeButton.addEventListener('click', () => {
+    userManagementDiv.remove();
+})
+  userManagementDiv.appendChild(closeButton);
+  ;
+
     document.body.appendChild(userManagementDiv);
 
 }
@@ -186,7 +198,18 @@ const displayProducts = () => {
     <p><strong>Price: </strong><span>$${product.price}</span></p>
     `
     productsDiv.appendChild(productDiv);
-    });
+    })
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'close';
+    closeButton.classList.add('close-button');
+
+    closeButton.addEventListener('click', () => {
+        productsDiv.remove();
+    })
+    
+    productsDiv.appendChild(closeButton);
+    document.body.appendChild(productsDiv);
 
     document.body.appendChild(productsDiv);
 }

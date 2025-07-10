@@ -128,3 +128,11 @@ button:hover{
     border-radius: 4px;
     outline: none;
 }
+.close-button {
+    background-color: #666699;
+    width: 100%;
+    
+}
+.close-button:hover {
+    background-color: #9999cc;
+}
