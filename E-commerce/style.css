@@ -5,31 +5,35 @@
     font-family: 'poppins', sans-serif;
 }
 
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #f0f2f5;
 }
-.login-container{
+
+.login-container {
     width: 400px;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.login-container h2{
+
+.login-container h2 {
     margin: 5px 0px;
-   color: #333;
-   text-align: center;
+    color: #333;
+    text-align: center;
 }
-.login-container label{
+
+.login-container label {
     display: block;
     margin: 10px 0 5px 0;
     font-weight: bold;
 }
-input[type="text"], input[type="password"]{
+
+input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -37,7 +41,8 @@ input[type="text"], input[type="password"]{
     border-radius: 5px;
     outline: none;
 }
-button{
+
+button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -47,19 +52,23 @@ button{
     color: #fff;
     cursor: pointer;
 }
-button:hover{
+
+button:hover {
     background-color: #4a8;
 }
-.error-message{
+
+.error-message {
     color: red;
     margin: 5px 0;
     text-align: center;
 }
-.success-message{
+
+.success-message {
     color: green;
     margin: 5px 0;
     text-align: center;
-} 
+}
+
 .content {
     width: 400px;
     padding: 20px;
@@ -67,72 +76,101 @@ button:hover{
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .content h2 {
-    margin: 5px 0px;
-    color: #333;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
     text-align: center;
+    color: #333;
+    display: block;
 }
-.content p{
+
+.content p {
     margin: 10px 0;
     color: #333;
 }
 
-.logout-button{
+.logout-button {
     width: 95%;
     background-color: #ff6666;
 }
+
 .logout-button:hover {
     background-color: #ff1a1a;
 }
-.create-button{
+
+.create-button {
     background-color: #179417;
 }
+
 .create-button:hover {
     background-color: #3dc73d;
 }
-.view-button{
+
+.view-button {
     background-color: #1a75ff;
 }
-.user-management,
-.products-container{
+
+.user-management {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.products-container {
     width: 500px;
     padding: 20px;
-    background-color: #ffff;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 10px;
 }
-.user-row{
+
+.user-row,
+.product-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px; 
-}
-.product-row {
-    width: 400px;
-    padding: 10px;
-    background-color: #ffff;
-    margin: 0 10px;
-    border-radius: 10px;
-    border: #ffff;
-    box-shadow: inset;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
+.product-row p{
+    margin: 5px 0px;
+}
 
-.user-row select{
-    padding: 5px;
+.user-row select {
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    cursor: pointer;
 }
+
+.user-row span {
+    flex: 1;
+    color: #333;
+    font-weight: 500;
+}
+
 .close-button {
     background-color: #666699;
     width: 100%;
-    
 }
+
 .close-button:hover {
     background-color: #9999cc;
 }

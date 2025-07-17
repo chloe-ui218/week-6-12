@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container" style="display: none;">
+        
         <h2>Login</h2>
         <p id="errorMessage" class="error-message"></p>
         <p id="successMessage" class="success-message"></p>
         <form id="loginForm">
             <label for="userName">Username:</label>
-            <input type="text" name="username" id="userName" placeholder="Please enter your username" required>
+            <input type="text" id="userName" placeholder="Please enter your username" required>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Please enter your password" required>
+            <input type="password" id="password" placeholder="Please enter your password" required>
             <button type="submit">Login</button>
         </form>
     </div>
